@@ -7,7 +7,7 @@
     Our goal is thus to create a simplified graphical interface which would allow the building of queries through drag-and-drop of visual components.
 
     As we see it at this moment, the project would be composed of 3-4 components:
-        - GraphDB feature extractor.
+        - Neo4J graph feature extractor.
         - Graphical Interface.
         - Graphical to Cypher Interpreter.
         - Connection to Neo4J drivers.
