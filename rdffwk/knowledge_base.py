@@ -17,7 +17,7 @@ class KnowledgeBase():
         self.prefixes[prefix] = uri
 
     def add_shorthand(self, shorthand, translation):
-        self._shorthands[shorthand] = translation
+        self.shorthands[shorthand] = translation
 
     def query(self, variables, query_type, query_params) -> Query:
         return Query(self, variables, query_type, query_params)

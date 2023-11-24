@@ -13,7 +13,7 @@ def main():
     
     print(str(q1))
 
-    q1.to_sparql()
+    print(q1.to_sparql())
 
 if __name__=="__main__":
     main()

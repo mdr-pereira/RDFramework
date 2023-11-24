@@ -1,7 +1,3 @@
-from typing import List
-from rdffwk.queue_builder.operators.where_op import WhereOperator
-from rdffwk.queue_builder.query_queue import QueryQueue
-
 
 class Query:
 
@@ -28,7 +24,7 @@ class Query:
         return self
 
     def to_sparql(self):
-        pass
+        return QueueToQuery(self).to_model()
 
     def __str__(self):
         return str(self.queue)

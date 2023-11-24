@@ -1,5 +1,6 @@
+from typing import Iterable
 
-class QueryQueue:
+class QueryQueue(Iterable):
 
     def __init__(self):
         self._queue = []
@@ -12,3 +13,6 @@ class QueryQueue:
 
     def __str__(self):
         return str(self._queue)
+    
+    def __iter__(self):
+        return iter(self._queue)
