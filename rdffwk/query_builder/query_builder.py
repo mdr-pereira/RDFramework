@@ -50,3 +50,11 @@ class QueryBuilder():
             sub_queries += query.to_sparql() + "\n"
             
         return sub_queries
+    
+    def build_filter(self) -> str:
+        filter_str = "FILTER\n{\n"
+
+        for condition in self.model.filter_conditions:
+            filter_str += f"{condition}.\n"
+
+        return filter_str + "\n}"

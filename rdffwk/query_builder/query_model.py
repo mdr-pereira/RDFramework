@@ -9,11 +9,15 @@ class QueryModel():
         
         self.triples = []
         self.subQueries = []
+        self.filter = []
         
         self.isSubQuery = isSubQuery
         
     def add_triple(self, triple: str):
         self.triples.append(triple)
+
+    def add_filter(self, filter: str):
+        self.filter.append(filter)
         
     def add_sub_query(self, query: QueryModel):
         self.subQueries.append(query)
