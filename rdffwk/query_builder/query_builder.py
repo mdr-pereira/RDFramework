@@ -16,8 +16,9 @@ class QueryBuilder():
     def build_select(self) -> str:
         variables = self.model.variables
         var_str = "SELECT "
+        
         for var in variables:
-            var_str += f"?{var} "
+            var_str += var + " "
             
         return var_str + "\n"
     

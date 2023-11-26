@@ -13,4 +13,4 @@ class WhereOperator(Operator):
         return f"{self.arg1} {self.arg2} {self.arg3}"
     
     def add_to_model(self, model):
-        model.add_triple([self.arg1, self.arg2, self.arg3])
+        model.add_triple(self.__repr__())

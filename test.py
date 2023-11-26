@@ -1,3 +1,4 @@
+from rdffwk.create_variables import create_variables
 from rdffwk.knowledge_base import KnowledgeBase
 
 def main():
@@ -8,12 +9,11 @@ def main():
         "ex2": "http://example.org/2"
     }
     
-    
-    s = "s"
-    o = "o"
+    s, o = create_variables("s", "o") 
     
     q1 = kb.query(s, o)\
-            .where(s, ":wb1", o)
+        .where(s, ":wb1", o)\
+        .where(s, ":wb2", o)\
 
     print(q1.to_sparql())
 
