@@ -30,3 +30,11 @@ class QueryBuilder():
             where_str += i == len(self.model.triples) - 2 and "\n" or ""
             
         return where_str + "\n}"
+    
+    def build_filter(self) -> str:
+        filter_str = "FILTER\n{\n"
+
+        for condition in self.model.filter_conditions:
+            filter_str += f"{condition}.\n"
+
+        return filter_str + "\n}"
