@@ -1,24 +1,22 @@
-from . import query
 from rdffwk.query_builder.query_model import QueryModel
 
-
-class QueueToQuery():
+class QueueToQueryModel():
     
     def __init__(self, query) -> None:
         self.query = query
         self.queue = query.queue
         
-    def to_model(self):
-        model = QueryModel()
+    def to_model(self) -> QueryModel:
+        model = QueryModel(self.query.variables, self.query.get_prefixes())
         
         for node in self.queue:
             cur_model = model
             
-            print(node.__class__)
-            
-            if (node.isInstance(Query)):
-                cur_model.add_sub_query(QueryModel(True))
+            if type(node) is type(self.query):
+                cur_model.add_sub_query(QueryModel(node.query.variables, node.query.get_prefixes(), True))
                 cur_model = cur_model.subQueries[-1]
             
             else:
-                pass
+                node.add_to_model(cur_model)
+                
+        return model

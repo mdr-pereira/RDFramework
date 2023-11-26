@@ -3,9 +3,11 @@ from rdffwk.query_builder.query import Query
 from rdffwk.utils import constants as const
 
 
-class KnowledgeBase():
+class KnowledgeBase(object):
 
     def __init__(self, graph_name, graph_uri, prefixes=const.DEFAULT_PREFIXES) -> None:
+        super().__init__()
+        
         self._graph_name = graph_name
         self._graph_uri = graph_uri
         self._prefixes = prefixes if prefixes != None else {}
@@ -19,8 +21,8 @@ class KnowledgeBase():
     def add_shorthand(self, shorthand, translation):
         self.shorthands[shorthand] = translation
 
-    def query(self, variables, query_type, query_params) -> Query:
-        return Query(self, variables, query_type, query_params)
+    def query(self, *variables) -> Query:
+        return Query(self, variables)
 
 
     #Getters and setters

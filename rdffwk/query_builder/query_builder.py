@@ -14,7 +14,7 @@ class QueryBuilder():
         return prefixes
     
     def build_select(self) -> str:
-        variables = self.model.query.variables
+        variables = self.model.variables
         var_str = "SELECT "
         for var in variables:
             var_str += f"?{var} "
@@ -22,9 +22,10 @@ class QueryBuilder():
         return var_str + "\n"
     
     def build_where(self) -> str:
-        where_str = "WHERE {\n"
+        where_str = "WHERE\n{\n"
         
-        for triple in self.model.queue:
-            where_str += f"    {triple}\n"
+        for i in range(len(self.model.triples)):
+            where_str += f"{self.model.triples[i]}."
+            where_str += i == len(self.model.triples) - 2 and "\n" or ""
             
-        return where_str + "}"
+        return where_str + "\n}"

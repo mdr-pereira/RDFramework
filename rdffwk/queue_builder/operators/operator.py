@@ -7,4 +7,7 @@ class Operator:
     def __str__(self):
         return self.id
     
+    def add_to_model(self, model):
+        pass
+    
     

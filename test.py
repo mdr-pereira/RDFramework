@@ -8,10 +8,12 @@ def main():
         "ex2": "http://example.org/2"
     }
     
-    q1 = kb.query("?s", "?p", "?o")\
-        .where("?s", "?p", "?o")
     
-    print(str(q1))
+    s = "s"
+    o = "o"
+    
+    q1 = kb.query(s, o)\
+            .where(s, ":wb1", o)
 
     print(q1.to_sparql())
 
