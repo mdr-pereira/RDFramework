@@ -3,17 +3,30 @@ class QueryBuilder():
 
     def __init__(self, model) -> None:
         self.model = model
+        self.isSubQuery = model.isSubQuery
     
     def build(self) -> str:
-        return self.build_prefixes() + self.build_select() + self.build_where()
+        query = ""
+        
+        query += "" if self.isSubQuery else self.prefixes()
+        
+        query += self.select()
+        
+        query += self.where()
+        
+        query += self.sub_queries()
+        
+        query += "}"
+        
+        return query
     
-    def build_prefixes(self) -> str:
+    def prefixes(self) -> str:
         prefixes = ""
         for prefix, uri in self.model.prefixes.items():
             prefixes += f"PREFIX {prefix}: <{uri}>\n"
         return prefixes
     
-    def build_select(self) -> str:
+    def select(self) -> str:
         variables = self.model.variables
         var_str = "SELECT "
         
@@ -22,11 +35,18 @@ class QueryBuilder():
             
         return var_str + "\n"
     
-    def build_where(self) -> str:
+    def where(self) -> str:
         where_str = "WHERE\n{\n"
         
         for i in range(len(self.model.triples)):
-            where_str += f"{self.model.triples[i]}."
-            where_str += i == len(self.model.triples) - 2 and "\n" or ""
+            where_str += f"{self.model.triples[i]}.\n"
             
-        return where_str + "\n}"
+        return where_str
+    
+    def sub_queries(self) -> str:
+        sub_queries = ""
+        
+        for query in self.model.subQueries:
+            sub_queries += query.to_sparql() + "\n"
+            
+        return sub_queries

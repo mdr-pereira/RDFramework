@@ -22,6 +22,9 @@ class QueryModel():
         self.isSubQuery = isSubQuery
         
     def to_sparql(self) -> str:
+        if(self.triples == [] and self.subQueries == []):
+            raise SystemExit("No triples or subqueries in query")
+        
         return QueryBuilder(self).build()
     
      

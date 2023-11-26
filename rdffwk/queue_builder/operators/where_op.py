@@ -4,7 +4,7 @@ from rdffwk.queue_builder.operators.operator import Operator
 class WhereOperator(Operator):
     
     def __init__(self, arg1: str, arg2:  str, arg3:  str):
-        super().__init__("id")
+        super().__init__("where_op")
         self.arg1 = arg1
         self.arg2 = arg2
         self.arg3 = arg3

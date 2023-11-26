@@ -27,6 +27,3 @@ class Query:
 
     def __str__(self):
         return str(self.queue)
-    
-    def var_corr(self, arg : str) -> str:
-        return f"?{arg}" if arg in self.variables else arg

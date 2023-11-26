@@ -15,6 +15,7 @@ def main():
         .where(s, ":wb1", o)\
         .where(s, ":wb2", o)\
             .query(f)\
+                .where(f, ":wb3", o)\
 
     print(q1.to_sparql())
 

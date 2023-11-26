@@ -22,13 +22,13 @@ class QueryQueue(Iterable):
     def to_model(self, query) -> QueryModel:
         model = QueryModel(query.variables, query.get_prefixes())
         
-        for node in self._queue:
-            cur_model = model
-            
+        cur_model = model
+        
+        for node in self._queue:    
             if type(node) is type(query):
                 cur_model.add_sub_query(QueryModel(node.variables, node.get_prefixes(), True))
                 cur_model = cur_model.subQueries[-1]
-            
+                
             else:
                 node.add_to_model(cur_model)
                 
