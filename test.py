@@ -9,11 +9,12 @@ def main():
         "ex2": "http://example.org/2"
     }
     
-    s, o = create_variables("s", "o") 
+    s, o, f = create_variables("s", "o", "f") 
     
     q1 = kb.query(s, o)\
         .where(s, ":wb1", o)\
         .where(s, ":wb2", o)\
+            .query(f)\
 
     print(q1.to_sparql())
 
