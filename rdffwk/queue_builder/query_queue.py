@@ -26,7 +26,7 @@ class QueryQueue(Iterable):
         
         for node in self._queue:    
             if type(node) is type(query):
-                cur_model.add_sub_query(QueryModel(node.variables, node.get_prefixes(), True))
+                cur_model.add_sub_query(QueryModel(node.variables, node.get_prefixes(), cur_model.depth + 2))
                 cur_model = cur_model.subQueries[-1]
                 
             else:

@@ -3,27 +3,41 @@ from rdffwk.query_builder.query_builder import QueryBuilder
 
 class QueryModel():
 
-    def __init__(self, variables, prefixes, isSubQuery: bool = False) -> None:
+    def __init__(self, variables, prefixes, depth: int = 0) -> None:
         self.prefixes = prefixes
         self.variables = variables
         
         self.triples = []
         self.subQueries = []
-        self.filter = []
+        self.filters = []
+        self.bindings = []
         
-        self.isSubQuery = isSubQuery
+        self.grouping = None
+        self.limit = None
+        self.offset = None
+        
+        self.depth = depth
         
     def add_triple(self, triple: str):
         self.triples.append(triple)
 
     def add_filter(self, filter: str):
-        self.filter.append(filter)
+        self.filters.append(filter)
+        
+    def add_bind(self, bind: str):
+        self.bindings.append(bind)
         
     def add_sub_query(self, query: QueryModel):
         self.subQueries.append(query)
         
-    def set_is_sub_query(self, isSubQuery: bool):
-        self.isSubQuery = isSubQuery
+    def set_grouping(self, variables):
+        self.grouping = variables
+        
+    def set_limit(self, limit: str):
+        self.limit = limit
+        
+    def set_offset(self, offset: str):
+        self.offset = offset
         
     def to_sparql(self) -> str:
         if(self.triples == [] and self.subQueries == []):

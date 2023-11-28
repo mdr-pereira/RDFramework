@@ -1,2 +1,5 @@
+from rdffwk.utils.variable import Variable
+
+
 def create_variables(*variables: str):
-    return [f"?{var}" for var in variables]
+    return [Variable(var) for var in variables]
