@@ -11,6 +11,7 @@ class QueryModel():
         self.subQueries = []
         self.filters = []
         self.bindings = []
+        self.having = []
         
         self.grouping = None
         self.limit = None
@@ -32,6 +33,9 @@ class QueryModel():
         
     def set_grouping(self, variables):
         self.grouping = variables
+        
+    def add_having(self, condition: str):
+        self.having.append(condition)
         
     def set_limit(self, limit: str):
         self.limit = limit

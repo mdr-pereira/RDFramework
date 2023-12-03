@@ -1,46 +1,51 @@
-
 class Variable():
     
-    def __init__(self, name: str) -> None:
-        self.name = f"?{name}"
-        self.post_operators = None
+    def __init__(self, name: str, f_op: bool = False) -> None:
+        self.name = f"?{name}" if not f_op else name
         
     def __repr__(self) -> str:
         return self.name
     
-    def __eq__(self, __value: object) -> str:
-        return f"{self.name} = {__value}"
     
-    def __ne__(self, __value: object) -> str:
-        return f"{self.name} != {__value}"
+    #Logical operators
     
-    def __lt__(self, __value: object) -> str:
-        return f"{self.name} < {__value}"
+    def __eq__(self, __value: object):
+        return Variable(f"{self.name} = {__value}", True)
     
-    def __gt__(self, __value: object) -> str:
-        return f"{self.name} > {__value}"
+    def __ne__(self, __value: object):
+        return Variable(f"{self.name} != {__value}", True)
     
-    def __le__(self, __value: object) -> str:
-        return f"{self.name} <= {__value}"
+    def __lt__(self, __value: object):
+        return Variable(f"{self.name} < {__value}", True)
     
-    def __ge__(self, __value: object) -> str:
-        return f"{self.name} >= {__value}"
+    def __le__(self, __value: object):
+        return Variable(f"{self.name} <= {__value}", True)
     
-    def __add__(self, __value: object) -> str:
-        return f"{self.name} + {__value}"
+    def __gt__(self, __value: object):
+        return Variable(f"{self.name} > {__value}", True)
     
-    def __sub__(self, __value: object) -> str:
-        return f"{self.name} - {__value}"
+    def __ge__(self, __value: object):
+        return Variable(f"{self.name} >= {__value}", True)
     
-    def __mul__(self, __value: object) -> str:
-        return f"{self.name} * {__value}"
+    def __and__(self, __value: object):
+        return Variable(f"({self.name}) && ({__value})", True)
     
-    def __truediv__(self, __value: object) -> str:
-        return f"{self.name} / {__value}"
+    def __or__(self, __value: object):
+        return Variable(f"({self.name}) || ({__value})", True)
     
-    def __mod__(self, __value: object) -> str:
-        return f"{self.name} % {__value}"
+    #Arithmetic operators
     
+    def __add__(self, __value: object):
+        return Variable(f"{self.name} + {__value}", True)
+    
+    def __sub__(self, __value: object):
+        return Variable(f"{self.name} - {__value}", True)
+    
+    def __mul__(self, __value: object):
+        return Variable(f"{self.name} * {__value}", True)
+    
+    def __truediv__(self, __value: object):
+        return Variable(f"{self.name} / {__value}", True)
     
     
     

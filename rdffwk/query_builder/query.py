@@ -18,8 +18,15 @@ class Query:
         self.queue.add(FilterOperator(condition))
         return self
 
-    def where(self, arg1, arg2, arg3):
-        self.queue.add(WhereOperator(arg1, arg2, arg3))
+    #Where clause can have 3 different signatures
+    #1. query(s, b), where b is a block
+    #2. query(s, o, l), where l is a list of tuples (operator, value)
+    #3. query(s, o, f, s2), where s2 is either a Variable or a list of Variables
+    def where(self, *args):
+        if(len(args) > 3 or len(args) < 1):
+            raise SystemExit("Invalid number of arguments for where clause")
+        
+        self.queue.add(WhereOperator(*args))
         return self
     
     def bind(self, var, as_var):
@@ -36,6 +43,10 @@ class Query:
     
     def offset(self, offset: int):
         self.queue.add(OffsetOperator(offset))
+        return self
+    
+    def having(self, condition):
+        self.queue.add(HavingOperator(condition))
         return self
     
     def get_prefixes(self):

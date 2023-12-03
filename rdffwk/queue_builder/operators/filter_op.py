@@ -8,7 +8,7 @@ class FilterOperator(Operator):
         self.condition = condition
     
     def __repr__(self):
-        return self.condition
+        return f"{self.condition}"
     
     def add_to_model(self, model):
         model.add_filter(self.__repr__())
