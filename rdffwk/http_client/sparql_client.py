@@ -19,15 +19,15 @@ class SparqlClient(HttpClient):
     def parse_response(self, response, export_file=None, export_format=ExportFormat.CSV):
         data = response.text
         body = data.split("\n", 1)[1]
-        
+       
         if len(body) == 0:
             return None
         
         match export_format:
             case ExportFormat.CSV:
-                data = self._to_csv(body)
+                variables, values = self._to_csv(body)
                 if export_file:
-                    self.write_csv(data, export_file)
+                    self._write_csv(variables, values, export_file)
             case _:
                 raise Exception("Unsupported export format")
                 
@@ -44,6 +44,7 @@ class SparqlClient(HttpClient):
             csv_file.write("\n".join(values))
             
     def _to_csv(self, response):
+        print(response)
         variables = []
         root = et.fromstring(response)
         
