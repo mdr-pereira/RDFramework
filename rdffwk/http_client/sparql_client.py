@@ -1,6 +1,5 @@
 from rdffwk.http_client.http_client import HttpClient
 import xml.etree.ElementTree as et
-import os
 
 class ExportFormat:
     CSV = "csv"
@@ -12,11 +11,10 @@ class SparqlClient(HttpClient):
         super(SparqlClient, self).__init__(url, port, "sparql", timeout)
         
     def send_and_parse(self, query, export_file=None, export_format=ExportFormat.CSV):
-        response = self.send_query(query)
-        return self.parse_response(response, export_file, export_format)
+        return self.parse_response(self.send_query(query), export_file, export_format)
         
     def send_query(self, query):
-        super(SparqlClient, self).send_query(query)
+        return super(SparqlClient, self).send_query(query)
     
     def parse_response(self, response, export_file=None, export_format=ExportFormat.CSV):
         data = response.text

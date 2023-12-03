@@ -35,7 +35,7 @@ def main():
     
     client = SparqlClient("https://query.wikidata.org", timeout=100)
     
-    client.send_and_parse(q3)
+    client.send_and_parse(query=q3)
     
     
 if __name__=="__main__":

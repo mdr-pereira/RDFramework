@@ -7,11 +7,11 @@ class HttpClient(object):
         
         self.timeout = timeout
         
-        self.check_connection()
+        #self.check_connection()
         
     def send_query(self, query):
         headers = {"Content-Type": "application/sparql-query"}
-        response = requests.post(self.url, headers=headers, timeout=self.timeout,  data=query)
+        response = requests.post(self.url, headers=headers, timeout=self.timeout, data=query)
         return response
     
     def _fix_url(self, url, port, suffix):    
