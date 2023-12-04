@@ -1,8 +1,9 @@
+from rdffwk.query_builder.interfaces import QueryInterface
 from rdffwk.queue_builder.operators import *
 from rdffwk.queue_builder.query_queue import QueryQueue
 from copy import deepcopy
 
-class Query:
+class Query(QueryInterface):
 
     def __init__(self, knowledge_base, variables) -> None:
         self.knowledge_base = knowledge_base
@@ -52,9 +53,6 @@ class Query:
     def having(self, condition):
         self.queue.add(HavingOperator(condition))
         return self
-    
-    def get_prefixes(self):
-        return self.knowledge_base.prefixes
     
     def cache(self):
         return deepcopy(self)
