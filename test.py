@@ -11,21 +11,15 @@ def main():
     #    "ex2": "http://example.org/2"
     #}
     
-    human, gender = create_variables("human", "humanlabel", "gender")
+    human, gender = create_variables("human", "gender")
     
     q1 = kb.query(human)\
         .where(human, "wdt:P21", gender)\
+        .service("wikibase:label", 'bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en"')\
         .filter("wikibase:isSomeValue(?gender)")\
         .limit(3).to_sparql()\
      
     print(q1)
-    
-    #q3 = """PREFIX wd: <http://www.wikidata.org/entity/>
-    #        PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-    #        SELECT ?item ?itemLabel WHERE {
-    #            ?item wdt:P31 wd:Q146.
-    #            SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
-    #        } LIMIT 3"""
     
     client = SparqlClient("https://query.wikidata.org", timeout=100)
     

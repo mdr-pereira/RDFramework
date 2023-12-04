@@ -6,3 +6,4 @@ from .limit_op import LimitOperator
 from .offset_op import OffsetOperator
 from .block_operators.where_block_op import WhereBlockOperator
 from .having_op import HavingOperator
+from .service_op import ServiceOperator

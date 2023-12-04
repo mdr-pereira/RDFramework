@@ -12,6 +12,7 @@ class QueryModel():
         self.filters = []
         self.bindings = []
         self.having = []
+        self.services = []
         
         self.grouping = None
         self.limit = None
@@ -27,6 +28,9 @@ class QueryModel():
         
     def add_bind(self, bind: str):
         self.bindings.append(bind)
+        
+    def add_service(self, service: str):
+        self.services.append(service)
         
     def add_sub_query(self, query: QueryModel):
         self.subQueries.append(query)

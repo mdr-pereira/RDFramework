@@ -29,6 +29,10 @@ class Query:
         self.queue.add(WhereOperator(*args))
         return self
     
+    def service(self, url, query):
+        self.queue.add(ServiceOperator(url, query))
+        return self
+    
     def bind(self, var, as_var):
         self.queue.add(BindOperator(var, as_var))
         return self
