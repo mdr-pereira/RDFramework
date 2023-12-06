@@ -1,15 +1,15 @@
-from rdffwk.query_builder.interfaces import QueryInterface
+
 from rdffwk.queue_builder.operators import *
-from rdffwk.queue_builder.query_queue import QueryQueue
+from rdffwk.queue_builder.queue import Queue
 from copy import deepcopy
 
-class Query(QueryInterface):
+class Query():
 
     def __init__(self, knowledge_base, variables) -> None:
         self.knowledge_base = knowledge_base
         self.variables = variables
         
-        self.queue = QueryQueue()
+        self.queue = Queue()
 
     def query(self, *args):
         self.queue.add(Query(self.knowledge_base, *args))
@@ -58,7 +58,10 @@ class Query(QueryInterface):
         return deepcopy(self)
 
     def to_sparql(self):
-        return self.queue.to_model(self).to_sparql()
+        return self.queue.to_query_model(self).to_sparql()
 
     def __str__(self):
         return str(self.queue)
+    
+    def get_prefixes(self):
+        return self.knowledge_base.prefixes

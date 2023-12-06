@@ -6,7 +6,7 @@
 ## TODO
 
 ### Improve features
-- [ ] The way that WHERE is processed to allow for the joined queries
+- [x] The way that WHERE is processed to allow for the joined queries
 - [ ] The way that we create groupings
 - [ ] Change how the where clause is stored to a map of maps, thus allowing us to optimize the query ad-hoc. (Explained below) 
 

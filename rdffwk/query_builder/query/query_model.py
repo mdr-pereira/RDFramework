@@ -1,5 +1,5 @@
 from __future__ import annotations
-from rdffwk.query_builder.query_builder import QueryBuilder
+from rdffwk.query_builder.query.query_builder import QueryBuilder
 
 class QueryModel():
 
@@ -13,6 +13,7 @@ class QueryModel():
         self.bindings = []
         self.having = []
         self.services = []
+        self.blocks = []
         
         self.grouping = None
         self.limit = None
@@ -31,6 +32,9 @@ class QueryModel():
         
     def add_service(self, service: str):
         self.services.append(service)
+        
+    def add_block(self, block: str):
+        self.blocks.append(block)
         
     def add_sub_query(self, query: QueryModel):
         self.subQueries.append(query)

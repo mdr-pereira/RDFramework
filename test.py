@@ -5,11 +5,6 @@ from rdffwk.utils import auxiliary_operators as aux
 
 def main():
     kb = KnowledgeBase("http://example.org/graph", "http://example.org/graph", None)
-
-    #kb.prefixes = {
-    #    "ex": "http://example.org/",
-    #    "ex2": "http://example.org/2"
-    #}
     
     human, gender = create_variables("human", "gender")
     
@@ -21,9 +16,18 @@ def main():
      
     print(q1)
     
-    client = SparqlClient("https://query.wikidata.org", timeout=100)
+    #client = SparqlClient("https://query.wikidata.org", timeout=100)
     
-    client.send_and_parse(query=q1, export_file="test.csv")
+    #client.send_and_parse(query=q1, export_file="test.csv")
+    
+    b2 = kb.block()\
+        .where(gender, "wdt:Q21", ":woman")\
+        
+    b1 = kb.block()\
+        .where(human, "wdt:P21", gender)\
+        .where(b2)
+        
+    print(b1.to_sparql())
     
     
 if __name__=="__main__":

@@ -113,6 +113,8 @@ class QueryBuilder():
         sub_queries = ""
         
         for query in self.model.subQueries:
-            sub_queries += f"{self.off}{{ {query.to_sparql()}{self.off}}}\n"
+            sub_queries += f"{self.off}{{\n"
+            sub_queries += query.to_sparql()
+            sub_queries += f"{self.off}}}\n"
             
         return sub_queries
