@@ -21,6 +21,9 @@ class BlockBuilder():
         
         block += f"{self.off_wop}}}"
         
+        if block.count("\n") <= 3:
+            block = block.replace("\n", "")
+        
         return block
     
     def triples(self) -> str:

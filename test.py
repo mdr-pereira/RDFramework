@@ -22,10 +22,13 @@ def main():
     
     b1 = kb.block()\
         .where(gender, "wdt:Q21", ":woman")\
+            
+    b2 = kb.block()\
+        .where("wd:Q6581072", "wdt:P31", ":person")\
         
-    q1 = q1.where(b1)
+    q2 = q1.minus(b1)
     
-    print(q1.to_sparql())
+    print(q2.to_sparql())
     
     
 if __name__=="__main__":

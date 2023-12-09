@@ -1,4 +1,3 @@
-
 from rdffwk.queue_builder.operators import *
 from rdffwk.queue_builder.queue import Queue
 from copy import deepcopy
@@ -28,6 +27,18 @@ class Query():
             raise SystemExit("Invalid number of arguments for where clause")
         
         self.queue.add(WhereOperator(*args))
+        return self
+    
+    def optional(self, block):
+        self.queue.add(OptionalOperator(block))
+        return self
+    
+    def union(self, block1, block2):
+        self.queue.add(UnionOperator(block1, block2))
+        return self
+    
+    def minus(self, block):
+        self.queue.add(MinusOperator(block))
         return self
     
     def service(self, url, query):

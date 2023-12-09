@@ -29,8 +29,6 @@ class Queue(Iterable):
             if type(node) is type(query):
                 cur_model.add_sub_query(QueryModel(node.variables, node.get_prefixes(), cur_model.depth + 2))
                 cur_model = cur_model.subQueries[-1]
-            elif str(node) == "where_op" and node.type == 1:
-                cur_model.add_triple(node.args[0].to_model(cur_model.depth + 1)) 
             else:
                 node.add_to_model(cur_model)
                 
@@ -42,9 +40,6 @@ class Queue(Iterable):
         cur_model = model
         
         for node in self._queue:
-            if str(node) == "where_op" and node.type == 1:
-                cur_model.add_triple(node.args[0].to_model(cur_model.depth + 1))
-            else:
-                node.add_to_model(cur_model)
+            node.add_to_model(cur_model)
                 
         return model
