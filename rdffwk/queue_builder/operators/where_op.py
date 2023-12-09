@@ -8,11 +8,10 @@ class WhereOperator(Operator):
         self.type = len(args)
         self.args = args
         
-        
     def __repr__(self):
         match self.type:
             case 1:
-                return repr(self.args[0])
+                return self.args[0].__repr__()
             case 2:
                 str_args = [f"{x} {y}" for x, y in self.args[1]]
                 

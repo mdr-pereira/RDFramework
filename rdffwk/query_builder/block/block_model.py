@@ -30,7 +30,9 @@ class BlockModel():
         
     def to_sparql(self) -> str:
         if(self.triples == [] and self.subQueries == []):
-            raise SystemExit("No triples or subqueries in query")
+            return "{}"
         
         return BlockBuilder(self).build()
     
+    def __repr__(self) -> str:
+        return self.to_sparql()

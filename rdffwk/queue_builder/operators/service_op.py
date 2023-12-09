@@ -3,6 +3,7 @@ from .operator import Operator
 class ServiceOperator(Operator):
     
     def __init__(self, endpoint, query):
+        super().__init__("service_op")
         self.endpoint = endpoint
         self.query = query
         

@@ -1,4 +1,3 @@
-
 from rdffwk.query_builder.query.query import Query
 from rdffwk.queue_builder.operators import *
 from rdffwk.queue_builder.queue import Queue
@@ -16,7 +15,7 @@ class Block():
     def where(self, *args):
         if(len(args) > 3 or len(args) < 1):
             raise SystemExit("Invalid number of arguments for where clause")
-        
+    
         self.queue.add(WhereOperator(*args))
         return self
     
@@ -28,8 +27,11 @@ class Block():
         self.queue.add(BindOperator(var, as_var))
         return self
     
+    def to_model(self, depth=0):
+        return self.queue.to_block_model(depth)
+    
     def to_sparql(self):
-        return self.queue.to_block_model(self).to_sparql()
+        return self.queue.to_block_model().to_sparql()
     
     def __repr__(self) -> str:
         return self.to_sparql()

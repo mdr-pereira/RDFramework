@@ -4,9 +4,10 @@ class BlockBuilder():
     def __init__(self, block):
         self.block = block
         self.off = " "*(block.depth+1)
+        self.off_wop = " "*(block.depth)
         
     def build(self) -> str:
-        block = "{\n"
+        block = f"{{\n"
         
         block += self.triples()
         
@@ -18,7 +19,7 @@ class BlockBuilder():
         
         block += self.services()
         
-        block += "}"
+        block += f"{self.off_wop}}}"
         
         return block
     

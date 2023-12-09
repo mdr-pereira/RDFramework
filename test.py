@@ -12,22 +12,20 @@ def main():
         .where(human, "wdt:P21", gender)\
         .service("wikibase:label", 'bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en"')\
         .filter("wikibase:isSomeValue(?gender)")\
-        .limit(3).to_sparql()\
+        .limit(3)\
      
-    print(q1)
+    print(q1.to_sparql())
     
     #client = SparqlClient("https://query.wikidata.org", timeout=100)
     
     #client.send_and_parse(query=q1, export_file="test.csv")
     
-    b2 = kb.block()\
+    b1 = kb.block()\
         .where(gender, "wdt:Q21", ":woman")\
         
-    b1 = kb.block()\
-        .where(human, "wdt:P21", gender)\
-        .where(b2)
-        
-    print(b1.to_sparql())
+    q1 = q1.where(b1)
+    
+    print(q1.to_sparql())
     
     
 if __name__=="__main__":
