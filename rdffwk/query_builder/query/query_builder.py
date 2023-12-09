@@ -25,6 +25,8 @@ class QueryBuilder():
         
         query += self.group_by()
         
+        query += self.order_by()
+        
         query += self.having()
         
         query += self.limit()
@@ -83,6 +85,11 @@ class QueryBuilder():
         if(self.model.grouping == None): return ""
     
         return f"{self.off_wop}GROUP BY {self.model.grouping}\n"
+    
+    def order_by(self) -> str:
+        if(self.model.ordering == None): return ""
+        
+        return f"{self.off_wop}ORDER BY {self.model.ordering}\n"
     
     def having(self) -> str:
         if(self.model.having == []): return ""

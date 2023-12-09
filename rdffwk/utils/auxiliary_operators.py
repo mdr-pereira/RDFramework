@@ -18,3 +18,9 @@ def SUM(expr) -> str :
 
 def AS(expr, alias) -> str :
     return f"{expr} AS {alias}"
+
+def DISTINCT(expr) -> str :
+    return f"DISTINCT {expr}"
+
+def REDUCED(expr) -> str :
+    return f"REDUCED {expr}"

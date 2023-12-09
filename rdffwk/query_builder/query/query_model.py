@@ -16,6 +16,7 @@ class QueryModel():
         self.blocks = []
         
         self.grouping = None
+        self.ordering = None
         self.limit = None
         self.offset = None
         
@@ -41,6 +42,9 @@ class QueryModel():
         
     def set_grouping(self, variables):
         self.grouping = variables
+        
+    def set_order_by(self, variables):
+        self.ordering = variables
         
     def add_having(self, condition: str):
         self.having.append(condition)

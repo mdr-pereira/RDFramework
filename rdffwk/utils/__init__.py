@@ -1,1 +1,1 @@
-from .auxiliary_operators import ASC, DESC
+from .auxiliary_operators import ASC, DESC, NOT, EXISTS, COUNT, SUM, AS, DISTINCT, REDUCED

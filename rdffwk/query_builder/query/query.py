@@ -18,10 +18,6 @@ class Query():
         self.queue.add(FilterOperator(condition))
         return self
 
-    #Where clause can have 3 different signatures
-    #1. query(s, b), where b is a block
-    #2. query(s, o, l), where l is a list of tuples (operator, value)
-    #3. query(s, o, f, s2), where s2 is either a Variable or a list of Variables
     def where(self, *args):
         if(len(args) > 3 or len(args) < 1):
             raise SystemExit("Invalid number of arguments for where clause")
@@ -41,6 +37,10 @@ class Query():
         self.queue.add(MinusOperator(block))
         return self
     
+    def graph(self, graph, group):
+        self.queue.add(GraphOperator(graph, group))
+        return self
+    
     def service(self, url, query):
         self.queue.add(ServiceOperator(url, query))
         return self
@@ -51,6 +51,10 @@ class Query():
     
     def group_by(self, *args):
         self.queue.add(GroupByOperator(*args))
+        return self
+    
+    def order_by(self, *args):
+        self.queue.add(OrderByOperator(*args))
         return self
     
     def limit(self, limit: int):

@@ -1,14 +1,14 @@
 from rdffwk.create_variables import create_variables
 from rdffwk.http_client.sparql_client import SparqlClient
 from rdffwk.knowledge_base import KnowledgeBase
-from rdffwk.utils import auxiliary_operators as aux
+from rdffwk.utils import *
 
 def main():
     kb = KnowledgeBase("http://example.org/graph", "http://example.org/graph", None)
     
     human, gender = create_variables("human", "gender")
     
-    q1 = kb.query(human)\
+    q1 = kb.query(DISTINCT(human))\
         .where(human, "wdt:P21", gender)\
         .service("wikibase:label", 'bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en"')\
         .filter("wikibase:isSomeValue(?gender)")\
@@ -26,7 +26,7 @@ def main():
     b2 = kb.block()\
         .where("wd:Q6581072", "wdt:P31", ":person")\
         
-    q2 = q1.minus(b1)
+    q2 = q1.minus(b1).order_by(DESC(human))
     
     print(q2.to_sparql())
     
