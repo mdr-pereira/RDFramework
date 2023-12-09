@@ -5,7 +5,7 @@ from rdffwk.utils import constants as const
 
 class KnowledgeBase(object):
 
-    def __init__(self, graph_name, graph_uri, prefixes=const.DEFAULT_PREFIXES) -> None:
+    def __init__(self, graph_name=None, graph_uri=None, prefixes=const.DEFAULT_PREFIXES) -> None:
         super().__init__()
         
         self._graph_name = graph_name

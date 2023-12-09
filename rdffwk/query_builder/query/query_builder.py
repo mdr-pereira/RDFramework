@@ -13,7 +13,7 @@ class QueryBuilder():
         
         query += self.select()
         
-        query += self.where()
+        query += self.triples()
         
         query += self.filter()
         
@@ -22,6 +22,8 @@ class QueryBuilder():
         query += self.values()
         
         query += self.bind()
+        
+        query += self.services()
         
         query += f"{self.off_wop}}}\n"
         
@@ -57,7 +59,7 @@ class QueryBuilder():
         return var_str + "\n"
     
     
-    def where(self) -> str:
+    def triples(self) -> str:
         where_str = f"{self.off_wop}WHERE {{\n"
         
         for i in range(len(self.model.triples)):
@@ -82,6 +84,14 @@ class QueryBuilder():
             bind_str += self.off + f"BIND ({bind}).\n"
 
         return bind_str
+    
+    def services(self) -> str:
+        service_str = ""
+        
+        for service in self.model.services:
+            service_str += self.off + f"SERVICE {service}.\n"
+            
+        return service_str
     
     def values(self) -> str:
         values_str = ""

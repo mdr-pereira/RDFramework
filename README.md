@@ -7,12 +7,13 @@
 
 ### Improve features
 - [x] The way that WHERE is processed to allow for the joined queries
-- [ ] The way that we create groupings
-- [ ] Change how the where clause is stored to a map of maps, thus allowing us to optimize the query ad-hoc. (Explained below) 
+- [x] The way that we create groupings
+- [ ] Change how the where clause is stored to a map of maps, thus allowing us to optimize the query ad-hoc. (Explained below)
+- [ ] The way that strings are processed so we don't have to put double quotation marks
 
 
 ### Add new features
-- [ ] VALUES 
+- [x] VALUES 
 - [ ] Bnodes
 
 ### Explanation

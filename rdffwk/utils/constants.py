@@ -1,4 +1,5 @@
 
+A = 'a'
 
 #TODO: Add more prefixes, and maybe some presets
 DEFAULT_PREFIXES = {

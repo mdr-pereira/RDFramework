@@ -15,6 +15,9 @@ def IN(var, values) -> Variable | str :
 def AS(expr, alias) -> Variable | str :
     return f"({expr} AS {alias})"
 
+def LANG(expr) -> Variable | str :
+    return _solve_for_var("LANG", expr)
+
 def ASC(expr) -> Variable | str:
     return _solve_for_var("ASC", expr)
 
@@ -27,8 +30,8 @@ def COUNT(expr) -> Variable | str :
 def SUM(expr) -> Variable | str :
     return _solve_for_var("SUM", expr)
 
-def DISTINCT(expr) -> Variable | str :
-    return _solve_for_var("DISTINCT", expr)
+def DISTINCT(*expr) -> Variable | str :
+    return f"DISTINCT {' '.join([str(e) for e in expr])}"
 
 def REDUCED(expr) -> Variable | str :
     return _solve_for_var("REDUCED", expr)
