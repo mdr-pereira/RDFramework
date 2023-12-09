@@ -1,26 +1,40 @@
-def NOT(expr) -> str :
-    return f"NOT {expr}"
+from .variable import Variable
 
-def EXISTS(expr) -> str :
-    return f"EXISTS {{{expr}}}"
+def NOT(expr) -> Variable | str :
+    return _solve_for_var("NOT", expr)
 
-def ASC(expr) -> str :
-    return f"ASC({expr})"
+def EXISTS(expr) -> str:
+    return f"EXISTS {expr}"
 
-def DESC(expr) -> str :
-    return f"DESC({expr})"
+def IN(var, values) -> Variable | str :
+    if values.__class__ == tuple or values.__class__ == list:
+        values = ", ".join([str(v) for v in values])
+        
+    return f"{var} IN ({values})"
 
-def COUNT(expr) -> str :
-    return f"COUNT({expr})"
+def AS(expr, alias) -> Variable | str :
+    return f"({expr} AS {alias})"
 
-def SUM(expr) -> str :
-    return f"SUM({expr})"
+def ASC(expr) -> Variable | str:
+    return _solve_for_var("ASC", expr)
 
-def AS(expr, alias) -> str :
-    return f"{expr} AS {alias}"
+def DESC(expr) -> Variable | str :
+    return _solve_for_var("DESC", expr)
 
-def DISTINCT(expr) -> str :
-    return f"DISTINCT {expr}"
+def COUNT(expr) -> Variable | str :
+    return _solve_for_var("COUNT", expr)
 
-def REDUCED(expr) -> str :
-    return f"REDUCED {expr}"
+def SUM(expr) -> Variable | str :
+    return _solve_for_var("SUM", expr)
+
+def DISTINCT(expr) -> Variable | str :
+    return _solve_for_var("DISTINCT", expr)
+
+def REDUCED(expr) -> Variable | str :
+    return _solve_for_var("REDUCED", expr)
+
+def _solve_for_var(op, expr) -> Variable | str:
+    if expr.__class__ == Variable:
+        return Variable(f"{op}({expr})", True)
+    
+    return f"{op}({expr})"

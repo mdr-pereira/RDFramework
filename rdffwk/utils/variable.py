@@ -1,6 +1,6 @@
 class Variable():
     
-    def __init__(self, name: str, f_op: bool = False) -> None:
+    def __init__(self, name, f_op: bool = False) -> None:
         self.name = f"?{name}" if not f_op else name
         
     def __repr__(self) -> str:
@@ -8,7 +8,6 @@ class Variable():
     
     
     #Logical operators
-    
     def __eq__(self, __value: object):
         return Variable(f"{self.name} = {__value}", True)
     

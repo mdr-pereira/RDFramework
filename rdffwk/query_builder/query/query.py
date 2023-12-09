@@ -17,6 +17,14 @@ class Query():
     def filter(self, condition):
         self.queue.add(FilterOperator(condition))
         return self
+    
+    def filter_exists(self, block, negation=False):
+        self.queue.add(FilterExistsOperator(block, negation))
+        return self
+    
+    def filter_not_exists(self, block):
+        self.queue.add(FilterExistsOperator(block, True))
+        return self
 
     def where(self, *args):
         if(len(args) > 3 or len(args) < 1):

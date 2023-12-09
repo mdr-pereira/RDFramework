@@ -30,6 +30,8 @@ def main():
     
     print(q2.to_sparql())
     
+    print(IN(human, [gender, "b"]))
+    
     
 if __name__=="__main__":
     main()
