@@ -12,3 +12,4 @@ from .minus_op import MinusOperator
 from .graph_op import GraphOperator
 from .order_by_op import OrderByOperator
 from .filter_exists_op import FilterExistsOperator
+from .values_op import ValuesOperator

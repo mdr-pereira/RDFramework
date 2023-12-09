@@ -19,6 +19,8 @@ class QueryBuilder():
         
         query += self.sub_queries()
         
+        query += self.values()
+        
         query += self.bind()
         
         query += f"{self.off_wop}}}\n"
@@ -80,6 +82,14 @@ class QueryBuilder():
             bind_str += self.off + f"BIND ({bind}).\n"
 
         return bind_str
+    
+    def values(self) -> str:
+        values_str = ""
+        
+        for values in self.model.values:
+            values_str += self.off + f"VALUES {values}.\n"
+            
+        return values_str
     
     def group_by(self) -> str:
         if(self.model.grouping == None): return ""

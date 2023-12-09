@@ -11,6 +11,7 @@ class QueryModel():
         self.subQueries = []
         self.filters = []
         self.bindings = []
+        self.values = []
         self.having = []
         self.services = []
         self.blocks = []
@@ -30,6 +31,9 @@ class QueryModel():
         
     def add_bind(self, bind: str):
         self.bindings.append(bind)
+        
+    def add_values(self, values: str):
+        self.values.append(values)
         
     def add_service(self, service: str):
         self.services.append(service)

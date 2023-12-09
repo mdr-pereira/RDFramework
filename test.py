@@ -26,7 +26,7 @@ def main():
     b2 = kb.block()\
         .where("wd:Q6581072", "wdt:P31", ":person")\
         
-    q2 = q1.minus(b1).order_by(DESC(human))
+    q2 = q1.minus(b1).order_by(DESC(human)).values(human, [":Q6581072", ":Q5"])
     
     print(q2.to_sparql())
     

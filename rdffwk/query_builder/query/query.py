@@ -57,6 +57,10 @@ class Query():
         self.queue.add(BindOperator(var, as_var))
         return self
     
+    def values(self, var, values):
+        self.queue.add(ValuesOperator(var, values))
+        return self
+    
     def group_by(self, *args):
         self.queue.add(GroupByOperator(*args))
         return self
