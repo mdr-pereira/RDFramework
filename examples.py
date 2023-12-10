@@ -1,12 +1,10 @@
-from rdffwk.create_variables import create_variables
 from rdffwk.http_client.sparql_client import SparqlClient
 from rdffwk.knowledge_base import KnowledgeBase
 from rdffwk.utils.auxiliary_operators import *
 
-
 kb = KnowledgeBase(prefixes=None)
 
-item, itemLabel, itemDescription, sitelinks = create_variables("item", "itemLabel", "itemDescription", "sitelinks")
+item, itemLabel, itemDescription, sitelinks = kb.create_variables("item", "itemLabel", "itemDescription", "sitelinks")
 
 q1 = kb.query(DISTINCT(item, itemLabel, itemDescription, sitelinks))\
     .where(item, [
@@ -14,12 +12,12 @@ q1 = kb.query(DISTINCT(item, itemLabel, itemDescription, sitelinks))\
         ("wdt:P19/wdt:P131*", "wd:Q60"), 
         ("wikibase:sitelinks", sitelinks)
         ])\
-    .service("wikibase:label", kb.block().where("bd:serviceparam", "wikibase:language", "\"[AUTO_LANGUAGE],en\""))\
+    .service("wikibase:label", kb.block().where("bd:serviceparam", "wikibase:language", STR("[AUTO_LANGUAGE],en")))\
         
 print(q1.to_sparql())
 
 
-p, c, pl, dl = create_variables("politician", "cause", "politician_label", "cause_of_death_label")
+p, c, pl, dl = kb.create_variables("politician", "cause", "politician_label", "cause_of_death_label")
 
 q2 = kb.query(p, c, pl, dl)\
     .where(p, [
