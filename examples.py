@@ -1,4 +1,3 @@
-from rdffwk.http_client.sparql_client import SparqlClient
 from rdffwk.knowledge_base import KnowledgeBase
 from rdffwk.utils.auxiliary_operators import *
 

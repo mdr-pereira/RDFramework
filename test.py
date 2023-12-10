@@ -1,4 +1,3 @@
-from rdffwk.create_variables import create_variables
 from rdffwk.http_client.sparql_client import SparqlClient
 from rdffwk.knowledge_base import KnowledgeBase
 from rdffwk.utils.auxiliary_operators import *
@@ -6,7 +5,7 @@ from rdffwk.utils.auxiliary_operators import *
 def main():
     kb = KnowledgeBase("http://example.org/graph", "http://example.org/graph", None)
     
-    human, gender = create_variables("human", "gender")
+    human, gender = kb.create_variables("human", "gender")
     
     q1 = kb.query(DISTINCT(human))\
         .where(human, "wdt:P21", gender)\

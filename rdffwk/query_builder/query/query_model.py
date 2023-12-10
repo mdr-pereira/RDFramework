@@ -1,48 +1,18 @@
-from __future__ import annotations
+from rdffwk.query_builder.abc_models import AbstractModel
 from rdffwk.query_builder.query.query_builder import QueryBuilder
 
-class QueryModel():
+class QueryModel(AbstractModel):
 
     def __init__(self, variables, prefixes, depth: int = 0) -> None:
+        super().__init__(depth)
+        
         self.prefixes = prefixes
         self.variables = variables
-        
-        self.triples = []
-        self.subQueries = []
-        self.filters = []
-        self.bindings = []
-        self.values = []
-        self.having = []
-        self.services = []
-        self.blocks = []
         
         self.grouping = None
         self.ordering = None
         self.limit = None
         self.offset = None
-        
-        self.depth = depth
-        
-    def add_triple(self, triple: str):
-        self.triples.append(triple)
-
-    def add_filter(self, filter: str):
-        self.filters.append(filter)
-        
-    def add_bind(self, bind: str):
-        self.bindings.append(bind)
-        
-    def add_values(self, values: str):
-        self.values.append(values)
-        
-    def add_service(self, service: str):
-        self.services.append(service)
-        
-    def add_block(self, block: str):
-        self.blocks.append(block)
-        
-    def add_sub_query(self, query: QueryModel):
-        self.subQueries.append(query)
         
     def set_grouping(self, variables):
         self.grouping = variables
