@@ -1,6 +1,5 @@
-from rdffwk.query_builder.abc_query_block import Abstract
+from rdffwk.query_builder.abstracts.abc_query_block import Abstract
 from rdffwk.queue_builder.operators.group_operators import *
-
 
 class Query(Abstract):
 
