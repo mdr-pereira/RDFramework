@@ -6,9 +6,7 @@ class QueryBuilder(AbstractBuilder):
         super().__init__(model)
    
     def build(self) -> str:
-        query = ""
-        
-        query += "" if self.model.depth != 0 else self.prefixes()
+        query = "" if self.model.depth > 0 else self.prefixes()
         
         query += self.select()
         
@@ -34,38 +32,35 @@ class QueryBuilder(AbstractBuilder):
     
     
     def select(self) -> str:
-        variables = self.model.variables
         var_str = "SELECT "
-        
-        if(variables.__class__ != tuple):
-            var_str += f"{variables}"
-        else:    
-            for var in variables:
-                var_str += f"{var} "
-                    
-        return var_str + "\n"
+        for var in self.model.variables:
+            var_str += f"{var} "
+        var_str += "\n"
+        return var_str
     
     def where(self) -> str:
-        where_str = f"{self.OFF_WOP}WHERE {{\n"
-        where_str += self.triples()
-        where_str += self.filters()
-        where_str += self.sub_queries()
-        where_str += self.values()
-        where_str += self.bind()
-        where_str += self.services()
-        where_str += f"{self.OFF_WOP}}}\n"
-        return where_str
+        block = f"{self.OFF_WOP}WHERE {self._inner_block_builder()}"
+    
+        if block.count("\n") <= 3:
+            block = block.replace("\n", "")
+            
+        if self.model.depth == 0:
+            block += "\n"
+        
+        return block
     
     def group_by(self) -> str:
-        if(self.model.grouping == None): return ""
-    
-        return f"{self.OFF_WOP}GROUP BY {self.model.grouping}\n"
+        return self._solve_if_exists(self.model.grouping, "GROUP BY")
     
     def order_by(self) -> str:
-        if(self.model.ordering == None): return ""
-        
-        return f"{self.OFF_WOP}ORDER BY {self.model.ordering}\n"
+        return self._solve_if_exists(self.model.ordering, "ORDER BY")
     
+    def limit(self) -> str:
+        return self._solve_if_exists(self.model.limit, "LIMIT")
+    
+    def offset(self) -> str:
+        return self._solve_if_exists(self.model.offset, "OFFSET")
+        
     def having(self) -> str:
         if(self.model.having == []): return ""
         
@@ -81,12 +76,7 @@ class QueryBuilder(AbstractBuilder):
         having_str += ").\n"
         return having_str
     
-    def limit(self) -> str:
-        if(self.model.limit == None): return ""
-        
-        return f"{self.OFF_WOP}LIMIT {self.model.limit}\n"
+    def _solve_if_exists(self, var, prefix) -> str:
+        if(var == None): return ""
+        return f"{self.OFF_WOP}{prefix} {var}\n"
     
-    def offset(self) -> str:
-        if(self.model.offset == None): return ""
-        
-        return f"{self.OFF_WOP}OFFSET {self.model.offset}\n"

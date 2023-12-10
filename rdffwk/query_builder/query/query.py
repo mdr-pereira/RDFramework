@@ -6,7 +6,10 @@ class Query(Abstract):
 
     def __init__(self, knowledge_base, variables) -> None:
         super().__init__(knowledge_base)
-        self.variables = variables
+        if variables.__class__ != tuple and variables.__class__ != list:
+            self.variables = [variables]
+        else:
+            self.variables = variables
         
     def query(self, *args):
         self.queue.add(Query(self.knowledge_base, *args))
