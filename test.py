@@ -22,13 +22,13 @@ def main():
     
     b1 = kb.block()\
         .where(gender, "wdt:Q21", ":woman")\
-            
-    b2 = kb.block()\
-        .where("wd:Q6581072", "wdt:P31", ":person")\
         
-    q2 = q1.minus(b1).order_by(DESC(human)).values(human, [":Q6581072", ":Q5"])
+    b2 = b1.cache().where("wd:Q6581072", "wdt:P31", human)
+        
+    #q2 = q1.minus(b1).order_by(DESC(human)).values(human, [":Q6581072", ":Q5"])
     
-    print(q2.to_sparql())
+    print(b1.to_sparql())
+    print(b2.to_sparql())
     
     print(IN(human, [gender, "b"]))
     

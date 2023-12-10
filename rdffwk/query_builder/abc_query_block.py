@@ -1,6 +1,6 @@
 from rdffwk.queue_builder.queue import Queue
-from rdffwk.queue_builder.operators import *
-
+from rdffwk.queue_builder.operators.simple_operators import *
+from copy import deepcopy
 
 class Abstract(object):
     """Abstract class that represents a query or a block, will only contain
@@ -69,6 +69,9 @@ class Abstract(object):
     
     def get_prefixes(self):
         return self.knowledge_base.prefixes
+    
+    def cache(self):
+        return deepcopy(self)
     
     def to_model(self, depth=0):
         raise NotImplementedError("Abstract method")

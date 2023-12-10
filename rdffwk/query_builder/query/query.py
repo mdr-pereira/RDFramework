@@ -1,7 +1,6 @@
 from rdffwk.query_builder.abc_query_block import Abstract
-from rdffwk.queue_builder.operators import *
-from rdffwk.queue_builder.queue import Queue
-from copy import deepcopy
+from rdffwk.queue_builder.operators.group_operators import *
+
 
 class Query(Abstract):
 
@@ -32,9 +31,6 @@ class Query(Abstract):
     def having(self, condition):
         self.queue.add(HavingOperator(condition))
         return self
-    
-    def cache(self):
-        return deepcopy(self)
     
     def to_model(self):
         return self.queue.to_query_model(self)

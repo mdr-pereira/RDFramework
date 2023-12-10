@@ -1,7 +1,5 @@
 from rdffwk.query_builder.abc_query_block import Abstract
 from rdffwk.query_builder.query.query import Query
-from rdffwk.queue_builder.operators import *
-
 
 class Block(Abstract):
     def __init__(self, knowledge_base) -> None:
