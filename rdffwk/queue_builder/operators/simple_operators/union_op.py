@@ -1,4 +1,4 @@
-from rdffwk.queue_builder.operators.operator import Operator
+from rdffwk.queue_builder.operators import Operator
 
 class UnionOperator(Operator):
     def __init__(self, block1, block2):

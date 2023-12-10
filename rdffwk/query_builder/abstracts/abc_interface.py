@@ -2,7 +2,7 @@ from rdffwk.queue_builder.queue import Queue
 from rdffwk.queue_builder.operators.simple_operators import *
 from copy import deepcopy
 
-class Abstract(object):
+class AbstractInterface(object):
     """Abstract class that represents a query or a block, will only contain
     methods that are common to both.
     This is, methods that can occur within the WHERE clause of a query.

@@ -1,4 +1,4 @@
-from rdffwk.query_builder.abc_builder import AbstractBuilder
+from rdffwk.query_builder.abstracts import AbstractBuilder
 
 class QueryBuilder(AbstractBuilder):
 

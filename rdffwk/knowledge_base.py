@@ -1,5 +1,5 @@
-from rdffwk.query_builder.block.block import Block
-from rdffwk.query_builder.query.query import Query
+from rdffwk.query_builder.block import Block
+from rdffwk.query_builder.query import Query
 from rdffwk.utils.variable import Variable
 from rdffwk.utils.constants import DEFAULT_PREFIXES
 

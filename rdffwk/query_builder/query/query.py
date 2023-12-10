@@ -1,7 +1,7 @@
-from rdffwk.query_builder.abstracts.abc_query_block import Abstract
+from rdffwk.query_builder.abstracts import AbstractInterface
 from rdffwk.queue_builder.operators.group_operators import *
 
-class Query(Abstract):
+class Query(AbstractInterface):
 
     def __init__(self, knowledge_base, variables) -> None:
         super().__init__(knowledge_base)

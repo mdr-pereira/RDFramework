@@ -1,4 +1,4 @@
-from rdffwk.queue_builder.operators.operator import Operator
+from rdffwk.queue_builder.operators import Operator
 
 
 class OrderByOperator(Operator):
