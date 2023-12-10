@@ -1,4 +1,4 @@
-from .operator import Operator
+from rdffwk.queue_builder.operators.operator import Operator
 
 class ServiceOperator(Operator):
     

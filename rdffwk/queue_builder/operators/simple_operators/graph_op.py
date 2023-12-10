@@ -1,6 +1,5 @@
 from rdffwk.queue_builder.operators.operator import Operator
 
-
 class GraphOperator(Operator):
     def __init__(self, graph, group):
         self.graph = graph

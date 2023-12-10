@@ -1,6 +1,5 @@
 from rdffwk.queue_builder.operators.operator import Operator
 
-
 class UnionOperator(Operator):
     def __init__(self, block1, block2):
         super().__init__("UNION")

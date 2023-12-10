@@ -1,6 +1,4 @@
-
 from rdffwk.queue_builder.operators.operator import Operator
-
 
 class FilterExistsOperator(Operator):
     def __init__(self, condition, negation=False):

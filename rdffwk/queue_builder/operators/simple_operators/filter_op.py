@@ -1,5 +1,6 @@
 from rdffwk.queue_builder.operators.operator import Operator
 
+
 class FilterOperator(Operator):
     
     

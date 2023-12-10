@@ -1,6 +1,5 @@
 from rdffwk.queue_builder.operators.operator import Operator
 
-
 class BindOperator(Operator): 
     def __init__(self, arg, as_var):
         super().__init__("bind")

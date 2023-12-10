@@ -1,6 +1,5 @@
 from rdffwk.queue_builder.operators.operator import Operator
 
-
 class ValuesOperator(Operator):
     def __init__(self, var, values):
         self.var = var

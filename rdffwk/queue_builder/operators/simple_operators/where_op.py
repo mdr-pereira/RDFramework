@@ -1,6 +1,5 @@
 from rdffwk.queue_builder.operators.operator import Operator
 
-
 class WhereOperator(Operator):
     
     def __init__(self, *args):

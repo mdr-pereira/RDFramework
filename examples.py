@@ -1,7 +1,7 @@
 from rdffwk.create_variables import create_variables
 from rdffwk.http_client.sparql_client import SparqlClient
 from rdffwk.knowledge_base import KnowledgeBase
-from rdffwk.utils import *
+from rdffwk.utils.auxiliary_operators import *
 
 
 kb = KnowledgeBase(prefixes=None)
@@ -27,8 +27,8 @@ q2 = kb.query(p, c, pl, dl)\
         ("wdt:P509", c)
     ])\
     .where(c, "wdt:P279*", "wd:Q12078")\
-    .optional(kb.block().where(p, "rdfs:label", pl).filter(LANG(pl) == '"en"'))\
-    .optional(kb.block().where(c, "rdfs:label", dl).filter(LANG(dl) == '"en"'))\
+    .optional(kb.block().where(p, "rdfs:label", pl).filter(LANG(pl) == STR("en")))\
+    .optional(kb.block().where(c, "rdfs:label", dl).filter(LANG(dl) == STR("en")))\
     .order_by(ASC(p))\
 
 print(q2.to_sparql())
