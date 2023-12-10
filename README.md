@@ -6,7 +6,7 @@
 ## TODO
 
 ### Issues/Errors
-- [ ] Block currently does not accept subqueries, and will break if we try to apply it.
+- [x] Block currently does not accept subqueries, and will break if we try to apply it.
 
 ### Improve features
 - [x] The way that WHERE is processed to allow for the joined queries

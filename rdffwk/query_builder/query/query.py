@@ -35,4 +35,4 @@ class Query(AbstractInterface):
         return self
     
     def to_model(self):
-        return self.queue.to_query_model(self)
+        return self.queue.to_query_model(self, self.__class__)

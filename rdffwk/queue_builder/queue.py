@@ -20,26 +20,26 @@ class Queue(Iterable):
     def __iter__(self):
         return iter(self._queue)
 
-    def to_query_model(self, query) -> QueryModel:
+    def to_query_model(self, query, query_class) -> QueryModel:
         model = QueryModel(query.variables, query.get_prefixes())
         
-        cur_model = model
+        self._iter_all_nodes(model, query_class)
+                
+        return model
+    
+    def to_block_model(self, query_class, depth=0) -> BlockModel:
+        model = BlockModel(depth)
         
-        for node in self._queue:    
-            if type(node) is type(query):
+        self._iter_all_nodes(model, query_class)
+                
+        return model
+    
+    def _iter_all_nodes(self, model, query_class):
+        cur_model = model
+         
+        for node in self._queue:
+            if node.__class__ == query_class:
                 cur_model.add_sub_query(QueryModel(node.variables, node.get_prefixes(), cur_model.depth + 2))
                 cur_model = cur_model.subQueries[-1]
             else:
                 node.add_to_model(cur_model)
-                
-        return model
-    
-    def to_block_model(self, depth=0) -> BlockModel:
-        model = BlockModel(depth)
-        
-        cur_model = model
-        
-        for node in self._queue:
-            node.add_to_model(cur_model)
-                
-        return model

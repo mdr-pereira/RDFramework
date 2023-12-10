@@ -10,6 +10,6 @@ class Block(AbstractInterface):
         return self
     
     def to_model(self, depth=0):
-        return self.queue.to_block_model(depth)
+        return self.queue.to_block_model(Query.__class__, depth)
     
     
