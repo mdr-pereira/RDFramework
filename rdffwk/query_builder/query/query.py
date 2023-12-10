@@ -1,5 +1,6 @@
 from rdffwk.query_builder.abstracts import AbstractInterface
 from rdffwk.queue_builder.operators.group_operators import *
+from rdffwk.queue_builder.queue import QueueOperator
 
 class Query(AbstractInterface):
 
@@ -12,9 +13,9 @@ class Query(AbstractInterface):
         
     def query(self, *args):
         if len(args) == 1 and args[0].__class__ == Query:
-            self.queue.add((args[0], False))
+            self.queue.add(QueueOperator("query", args[0], False))
         else:
-            self.queue.add((Query(self.knowledge_base, *args), True))
+            self.queue.add(QueueOperator("query", Query(self.knowledge_base, *args), True))
         return self
     
     def group_by(self, *args):

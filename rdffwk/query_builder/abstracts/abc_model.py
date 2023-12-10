@@ -1,6 +1,6 @@
 class AbstractModel(object):
     
-    def __init__(self, depth=0) -> None:
+    def __init__(self, parent=None, depth=0) -> None:
         super().__init__()
         
         self.triples = []
@@ -11,6 +11,7 @@ class AbstractModel(object):
         self.having = []
         self.services = []
         
+        self.parent = parent
         self.depth = depth
     
     
@@ -34,6 +35,13 @@ class AbstractModel(object):
         
     def set_depth(self, depth: int):
         self.depth = depth
+        
+    def set_parent(self, parent):
+        self.parent = parent
+        
+    def set_precedents(self, parent, depth):
+        self.set_parent(parent)
+        self.set_depth(depth)
         
     def to_sparql(self) -> str:
         raise NotImplementedError("Method not implemented")

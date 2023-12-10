@@ -3,8 +3,8 @@ from rdffwk.query_builder.query.query_builder import QueryBuilder
 
 class QueryModel(AbstractModel):
 
-    def __init__(self, variables, prefixes, depth: int = 0) -> None:
-        super().__init__(depth)
+    def __init__(self, variables, prefixes, parent=None, depth: int = 0) -> None:
+        super().__init__(parent, depth)
         
         self.prefixes = prefixes
         self.variables = variables

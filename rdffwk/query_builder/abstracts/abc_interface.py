@@ -1,4 +1,4 @@
-from rdffwk.queue_builder.queue import Queue
+from rdffwk.queue_builder.queue import Queue, QueueOperator
 from rdffwk.queue_builder.operators.simple_operators import *
 from copy import deepcopy
 
@@ -80,6 +80,10 @@ class AbstractInterface(object):
     
     def cache(self):
         return deepcopy(self)
+    
+    def up(self):
+        self.queue.add(QueueOperator("up"))
+        return self
     
     def to_model(self, depth=0):
         raise NotImplementedError("Abstract method")
