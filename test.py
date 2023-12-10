@@ -1,40 +1,43 @@
-from certifi import where
 from rdffwk.http_client.sparql_client import SparqlClient
 from rdffwk.knowledge_base import KnowledgeBase
 from rdffwk.utils.auxiliary_operators import *
 
 def main():
-    kb = KnowledgeBase("http://example.org/graph", "http://example.org/graph", None)
+    kb = KnowledgeBase(prefixes={"dbpp": "http://dbpedia.org/property/"})
     
-    human, gender = kb.create_variables("human", "gender")
+    #This could have been added above, but it is here to show that you can add prefixes after the knowledge base is created.
+    kb.add_prefix("dbpr", "http://dbpedia.org/resource/")
     
-    q1 = kb.query(DISTINCT(human))\
-        .where(human, "wdt:P21", gender)\
-        .service("wikibase:label", 'bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en"')\
-        .filter("wikibase:isSomeValue(?gender)")\
-        .limit(3)\
-     
-    #print(q1.to_sparql())
+    m, a, mc, ac, aw = kb.create_variables("movie", "actor", "movie_count", "actor_country", "award")
     
-    #client = SparqlClient("https://query.wikidata.org", timeout=100)
+    query = kb.query("*")\
+        .get_from("http://dbpedia.org")\
+        .where(m, "dbpp:starring", a)\
+        .optional(kb.block().where(a, "dbpp:academyAward", aw))\
+        .query(DISTINCT(m), AS(COUNT((DISTINCT(aw))), mc))\
+            .where(a, [("dbpp:birthPlace", ac), ("^dbpp:starring", m)])\
+            .filter(ac == "dbpr:United_States")\
+            .group_by(a)\
+            .having(COUNT(DISTINCT(mc)) >= 50) # type: ignore
     
-    #client.send_and_parse(query=q1, export_file="test.csv")
+    print(query.to_sparql())
     
-    b1 = kb.block()\
-        .where(gender, "wdt:Q21", ":woman")\
-        .query(COUNT(human))\
-        .where(human, "wdt:P31", "wd:Q5")\
-        .up()\
-        .where("wd:Q6581072", "wdt:P31", human)
+    #Or equivalently:
     
-        
-    #b3 = b1.cache().where("wd:Q6581072", "wdt:P31", human)
-        
-    #q2 = q1.minus(b1).order_by(DESC(human)).values(human, [":Q6581072", ":Q5"])
+    main_query = kb.query("*")\
+        .get_from("http://dbpedia.org")\
+        .where(m, "dbpp:starring", a)\
+        .optional(kb.block().where(a, "dbpp:academyAward", aw))\
     
-    print(b1.to_sparql())
-    #print(b3.to_sparql())
+    subquery = kb.query(DISTINCT(m), AS(COUNT((DISTINCT(aw))), mc))\
+            .where(a, [("dbpp:birthPlace", ac), ("^dbpp:starring", m)])\
+            .filter(ac == "dbpr:United_States")\
+            .group_by(a)\
+            .having(COUNT(DISTINCT(mc)) >= 50) # type: ignore
+            
+    main_query = main_query.query(subquery)
     
+    print(query.to_sparql())
     
     
 if __name__=="__main__":

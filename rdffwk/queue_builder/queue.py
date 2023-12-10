@@ -1,5 +1,3 @@
-from ast import Tuple
-from hmac import new
 from typing import Iterable
 from rdffwk.query_builder.block.block_model import BlockModel
 from rdffwk.query_builder.query.query_model import QueryModel
@@ -50,11 +48,11 @@ class Queue(Iterable):
     
     def _add_query_to_model(self, model, query, keep_currrent):
         if keep_currrent:
-            model.add_sub_query(QueryModel(query.variables, query.get_prefixes(), parent=model, depth=model.depth + 2))
+            model.add_sub_query(QueryModel(query.variables, query.get_prefixes(), parent=model, depth=model.depth + 3))
             model = model.subQueries[-1]
         else:
             model.add_sub_query(query.to_model())
-            model.subQueries[-1].set_precedents(model, model.depth + 2)
+            model.subQueries[-1].set_precedents(model, model.depth + 3)
         return model
      
     def _print_item_classes(self):

@@ -40,7 +40,4 @@ def REDUCED(expr) -> Variable | str :
     return _solve_for_var("REDUCED", expr)
 
 def _solve_for_var(op, expr) -> Variable | str:
-    if expr.__class__ == Variable:
-        return Variable(f"{op}({expr})", True)
-    
-    return f"{op}({expr})"
+    return Variable(f"{op}({expr})", True)

@@ -9,10 +9,15 @@ class QueryModel(AbstractModel):
         self.prefixes = prefixes
         self.variables = variables
         
+        self.from_uri = None
+        
         self.grouping = None
         self.ordering = None
         self.limit = None
         self.offset = None
+        
+    def set_from(self, uri):
+        self.from_uri = uri
         
     def set_grouping(self, variables):
         self.grouping = variables

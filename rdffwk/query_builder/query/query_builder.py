@@ -10,6 +10,8 @@ class QueryBuilder(AbstractBuilder):
         
         query += self.select()
         
+        query += self.from_uri()
+        
         query += self.where()
         
         query += self.group_by()
@@ -37,6 +39,9 @@ class QueryBuilder(AbstractBuilder):
             var_str += f"{var} "
         var_str += "\n"
         return var_str
+    
+    def from_uri(self) -> str:
+        return self._solve_if_exists(self.model.from_uri, "FROM")
     
     def where(self) -> str:
         block = f"{self.OFF_WOP}WHERE {self._inner_block_builder()}"
