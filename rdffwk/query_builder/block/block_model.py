@@ -1,5 +1,5 @@
 from rdffwk.query_builder.abstracts import AbstractModel
-from rdffwk.query_builder.block import BlockBuilder
+from rdffwk.query_builder.block.block_builder import BlockBuilder
 
 class BlockModel(AbstractModel):
     

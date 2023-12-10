@@ -1,6 +1,6 @@
 from typing import Iterable
-from rdffwk.query_builder.block import BlockModel
-from rdffwk.query_builder.query import QueryModel
+from rdffwk.query_builder.block.block_model import BlockModel
+from rdffwk.query_builder.query.query_model import QueryModel
 
 
 class Queue(Iterable):

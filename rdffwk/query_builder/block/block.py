@@ -1,5 +1,5 @@
 from rdffwk.query_builder.abstracts import AbstractInterface
-from rdffwk.query_builder.query import Query
+from rdffwk.query_builder.query.query import Query
 
 class Block(AbstractInterface):
     def __init__(self, knowledge_base) -> None:
