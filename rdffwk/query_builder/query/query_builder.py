@@ -43,9 +43,6 @@ class QueryBuilder(AbstractBuilder):
     
         if block.count("\n") <= 3:
             block = block.replace("\n", "")
-            
-        if self.model.depth == 0:
-            block += "\n"
         
         return block
     

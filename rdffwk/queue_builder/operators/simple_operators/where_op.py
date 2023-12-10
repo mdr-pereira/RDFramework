@@ -19,8 +19,11 @@ class WhereOperator(Operator):
                 
                 return f"{self.args[0]} " + "; ".join(str_args)
             case 3:
-                if self.args[2].__class__ == list:
+                if self.args[2].__class__ == list or self.args[2].__class__ == tuple:
                     return f"{self.args[0]} {self.args[1]} " + ", ".join([str(x) for x in self.args[2]])
+                
+                elif self.args[1].__class__ == list or self.args[1].__class__ == tuple:
+                    return f"{self.args[0]} " + "; ".join([f"{x} {self.args[2]}" for x in self.args[1]])
                 
                 return f"{self.args[0]} {self.args[1]} {self.args[2]}"
                 
