@@ -1,4 +1,4 @@
-from rdffwk.query_builder.abc_models import AbstractModel
+from rdffwk.query_builder.abc_model import AbstractModel
 from rdffwk.query_builder.block.block_builder import BlockBuilder
 
 class BlockModel(AbstractModel):

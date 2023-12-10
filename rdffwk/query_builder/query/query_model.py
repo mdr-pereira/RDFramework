@@ -1,4 +1,4 @@
-from rdffwk.query_builder.abc_models import AbstractModel
+from rdffwk.query_builder.abc_model import AbstractModel
 from rdffwk.query_builder.query.query_builder import QueryBuilder
 
 class QueryModel(AbstractModel):
