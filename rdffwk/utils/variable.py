@@ -1,7 +1,7 @@
 class Variable():
     
     def __init__(self, name, f_op: bool = False) -> None:
-        self.name = f"?{name}" if not f_op else name
+        self.name = name if f_op else f"?{name}" #If this variable has been created by an operator, then it is not a variable, but an expression. 
         
     def __repr__(self) -> str:
         return self.name

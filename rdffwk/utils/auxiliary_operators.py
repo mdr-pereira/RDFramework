@@ -1,5 +1,8 @@
 from .variable import Variable
 
+def STR(expr) -> str :
+    return f"\"{expr}\""
+
 def NOT(expr) -> Variable | str :
     return _solve_for_var("NOT", expr)
 
