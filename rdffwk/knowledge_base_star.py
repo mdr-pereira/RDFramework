@@ -14,7 +14,7 @@ class KnowledgeBaseStar(KnowledgeBase):
     def block(self) -> BlockStar:
         return BlockStar(self)
     
-    def create_star_quoted_triple(self, subj, pred, obj):
+    def create_quoted_triple(self, subj, pred, obj):
         return (subj, pred, obj)
     
     

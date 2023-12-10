@@ -12,6 +12,8 @@ q1 = kb.query(DISTINCT(item, itemLabel, itemDescription, sitelinks))\
         ("wikibase:sitelinks", sitelinks)
         ])\
     .service("wikibase:label", kb.block().where("bd:serviceparam", "wikibase:language", STR("[AUTO_LANGUAGE],en")))\
+    .query(COUNT(item))\
+    .where(item, "wdt:P31", "wd:Q5")\
         
 print(q1.to_sparql())
 

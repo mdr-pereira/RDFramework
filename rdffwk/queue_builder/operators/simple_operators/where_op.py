@@ -19,15 +19,17 @@ class WhereOperator(Operator):
                 
                 return f"{self.args[0]} " + "; ".join(str_args)
             case 3:
-                if self.args[2].__class__ == list or self.args[2].__class__ == tuple:
-                    return f"{self.args[0]} {self.args[1]} " + ", ".join([str(x) for x in self.args[2]])
+                if self._is_iterable(self.args[2]):
+                    return f"{self.args[0]} {self.args[1]} {','.join([str(x) for x in self.args[2]])}"
                 
-                elif self.args[1].__class__ == list or self.args[1].__class__ == tuple:
-                    return f"{self.args[0]} " + "; ".join([f"{x} {self.args[2]}" for x in self.args[1]])
+                if self._is_iterable(self.args[1]):
+                    return f"{self.args[0]} {'; '.join([f'{x} {self.args[2]}' for x in self.args[1]])}"
                 
                 return f"{self.args[0]} {self.args[1]} {self.args[2]}"
                 
     def add_to_model(self, model):
         model.add_triple(self.__repr__(model))
-        
+    
+    def _is_iterable(self, arg):
+        return arg.__class__ == list or arg.__class__ == tuple
         

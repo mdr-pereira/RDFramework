@@ -32,7 +32,7 @@ class QueryBuilder(AbstractBuilder):
     
     
     def select(self) -> str:
-        var_str = "SELECT "
+        var_str = f"{self.OFF_WOP}SELECT "
         for var in self.model.variables:
             var_str += f"{var} "
         var_str += "\n"
@@ -41,8 +41,7 @@ class QueryBuilder(AbstractBuilder):
     def where(self) -> str:
         block = f"{self.OFF_WOP}WHERE {self._inner_block_builder()}"
     
-        if block.count("\n") <= 3:
-            block = block.replace("\n", "")
+        if block.count("\n") <= 3: block = block.replace("\n", "")
         
         return block
     

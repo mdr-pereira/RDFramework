@@ -42,7 +42,7 @@ class AbstractBuilder(object):
         for query in self.model.subQueries:
             sub_queries += f"{self.OFF}{{\n"
             sub_queries += query.to_sparql()
-            sub_queries += f"{self.OFF}}}\n"
+            sub_queries += f"\n{self.OFF}}}\n"
         return sub_queries
     
     def _inner_block_builder(self) -> str:
