@@ -1,4 +1,8 @@
-# graphdb-simplified
+# RDFramework
+
+This project was done under the Data Modelling course of the Winter Semester 2023/24, and is based on the project developed by @qcri (https://github.com/qcri/RDFframes).
+
+An access framework within Python which allows users to construct and run Turtle-SPARQL and Turtle-Star-SPARQL using familiar python-like API calls.
 
 ## Abstract
 
