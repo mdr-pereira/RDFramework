@@ -32,6 +32,9 @@ class AbstractModel(object):
     def add_sub_query(self, query):
         self.subQueries.append(query)
         
+    def set_depth(self, depth: int):
+        self.depth = depth
+        
     def to_sparql(self) -> str:
         raise NotImplementedError("Method not implemented")
     

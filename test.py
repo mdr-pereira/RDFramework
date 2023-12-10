@@ -1,3 +1,4 @@
+from certifi import where
 from rdffwk.http_client.sparql_client import SparqlClient
 from rdffwk.knowledge_base import KnowledgeBase
 from rdffwk.utils.auxiliary_operators import *
@@ -13,7 +14,7 @@ def main():
         .filter("wikibase:isSomeValue(?gender)")\
         .limit(3)\
      
-    print(q1.to_sparql())
+    #print(q1.to_sparql())
     
     #client = SparqlClient("https://query.wikidata.org", timeout=100)
     
@@ -21,15 +22,21 @@ def main():
     
     b1 = kb.block()\
         .where(gender, "wdt:Q21", ":woman")\
+    
+    q2 = kb.query(COUNT(human))\
+        .where(human, "wdt:P31", "wd:Q5")
+    
+    b2 = b1.cache().query(q2)
         
-    b2 = b1.cache().where("wd:Q6581072", "wdt:P31", human)
+    #b3 = b1.cache().where("wd:Q6581072", "wdt:P31", human)
         
     #q2 = q1.minus(b1).order_by(DESC(human)).values(human, [":Q6581072", ":Q5"])
     
     print(b1.to_sparql())
+    print("\n\n\n")
     print(b2.to_sparql())
+    #print(b3.to_sparql())
     
-    print(IN(human, [gender, "b"]))
     
     
 if __name__=="__main__":

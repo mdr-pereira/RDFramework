@@ -11,7 +11,10 @@ class Query(AbstractInterface):
             self.variables = variables
         
     def query(self, *args):
-        self.queue.add(Query(self.knowledge_base, *args))
+        if len(args) == 1 and args[0].__class__ == Query:
+            self.queue.add((args[0], False))
+        else:
+            self.queue.add((Query(self.knowledge_base, *args), True))
         return self
     
     def group_by(self, *args):
@@ -35,4 +38,5 @@ class Query(AbstractInterface):
         return self
     
     def to_model(self):
-        return self.queue.to_query_model(self, Query)
+        model = self.queue.to_query_model(self)
+        return model
