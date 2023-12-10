@@ -11,7 +11,7 @@ def EXISTS(expr) -> str:
 
 def IN(var, values) -> Variable | str :
     if values.__class__ == tuple or values.__class__ == list:
-        values = ", ".join([str(v) for v in values])
+        values = ", ".join([STR(v) for v in values])
         
     return f"{var} IN ({values})"
 

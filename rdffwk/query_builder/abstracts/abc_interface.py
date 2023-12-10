@@ -39,6 +39,14 @@ class AbstractInterface(object):
         self.queue.add(FilterExistsOperator(block, True))
         return self
     
+    def filter_in(self, var, values, negation=False):
+        self.queue.add(FilterInOperator(var, values, negation))
+        return self
+    
+    def filter_not_in(self, var, values):
+        self.queue.add(FilterInOperator(var, values, True))
+        return self
+    
     def optional(self, block):
         self.queue.add(OptionalOperator(block))
         return self

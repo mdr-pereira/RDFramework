@@ -7,4 +7,5 @@ from .union_op import UnionOperator
 from .minus_op import MinusOperator
 from .graph_op import GraphOperator
 from .filter_exists_op import FilterExistsOperator
+from .filter_in_op import FilterInOperator
 from .values_op import ValuesOperator
