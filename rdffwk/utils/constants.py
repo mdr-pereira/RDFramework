@@ -1,7 +1,10 @@
+"""Constants used in the framework
+Will be populated with more constants
+"""
 
 A = 'a'
 
-#TODO: Add more prefixes, and maybe some presets
+# TODO: Add more prefixes, and maybe some presets
 DEFAULT_PREFIXES = {
     'rdf': 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
     'rdfs': 'http://www.w3.org/2000/01/rdf-schema#',
@@ -15,4 +18,10 @@ DEFAULT_PREFIXES = {
     'qb': 'http://purl.org/linked-data/cube#',
     'org': 'http://www.w3.org/ns/org#',
     'schema': 'http://schema.org/',
+}
+
+SIMPLE_RDF_PREFIXES = {
+    'rdf': 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+    'rdfs': 'http://www.w3.org/2000/01/rdf-schema#',
+    'foaf': 'http://xmlns.com/foaf/0.1/',
 }
