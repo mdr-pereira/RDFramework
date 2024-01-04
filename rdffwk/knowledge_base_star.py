@@ -1,7 +1,6 @@
 from rdffwk.knowledge_base import KnowledgeBase
 from rdffwk.query_builder.block.block_star import BlockStar
 from rdffwk.query_builder.query.query_star import QueryStar
-from typing import Union
 
 
 class KnowledgeBaseStar(KnowledgeBase):

@@ -1,5 +1,7 @@
 from __future__ import annotations
+
 from typing import Tuple, List
+
 from .variable import Variable
 
 """This module contains auxiliary operators that can be used in the query and block objects.

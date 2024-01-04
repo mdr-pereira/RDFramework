@@ -1,5 +1,7 @@
-from rdffwk.http_client.http_client import HttpClient
 import xml.etree.ElementTree as et
+
+from rdffwk.http_client.http_client import HttpClient
+
 
 class ExportFormat:
     CSV = "csv"
